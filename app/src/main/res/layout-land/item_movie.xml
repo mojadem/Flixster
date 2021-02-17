@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginBottom="1dp"
+    android:background="@android:color/background_dark">
 
     <ImageView
         android:id="@+id/ivPoster"
@@ -19,6 +24,7 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         tools:text="Finding Nemo" />
 
@@ -30,5 +36,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:textColor="@android:color/white"
+        android:ellipsize="end"
+        android:lines="9"
         tools:text="A fish named Nemo goes missing because he wanted to touch the boat. His brave father and a turtle go rescue him." />
 </RelativeLayout>
