@@ -24,6 +24,8 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 ### Notes
 Describe any challenges encountered while building the app.
 
+Creating this app was a great way to learn the basics of Android Development. I completed the required stories with ease as I had the assistance of the video walkthroughs. However, implementing the bonus stories was a bit more difficult. Specifically, I had trouble finding a way to limit the text so it would not run past the bottom of the image. I eventually found a way to easily limit the amount of lines a textView can hold, as well as how to append ellipsis to imply that there is more to the movie overview. I also had trouble implementing placeholder images while the image loaded using Glide. I was not able to figure out what was going wrong, so I cut the optional feature.
+
 ### Open-source libraries used
 
 - [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
