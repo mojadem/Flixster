@@ -5,11 +5,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
-    android:layout_marginBottom="1dp"
-    android:layout_marginTop="1dp"
-    android:background="@android:color/background_dark">
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="#222222">
 
     <ImageView
         android:id="@+id/ivPoster"
@@ -22,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/ivPoster"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -33,11 +32,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
-        android:textColor="@android:color/white"
-        android:lines="8"
         android:ellipsize="end"
+        android:maxLines="8"
+        android:textColor="@android:color/white"
         tools:text="A fish named Nemo goes missing because he wanted to touch the boat. His brave father and a turtle go rescue him. A fish named Nemo goes missing because he wanted to touch the boat. His brave father and a turtle go rescue him." />
 </RelativeLayout>

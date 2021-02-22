@@ -89,6 +89,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 imageUrl = movie.getPosterPath();
             }
 
+            tvTitle.post(new Runnable() {
+                @Override
+                public void run() {
+                    int lineCount = tvTitle.getLineCount();
+                    if (lineCount > 1) {
+                        tvOverview.setMaxLines(tvOverview.getMaxLines() - 1);
+                    }
+                }
+            });
+
             Glide.with(context).load(imageUrl).into(ivPoster);
 
             // Register click listener on whole container

@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="@android:color/background_dark">
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/player"
@@ -18,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:textColor="@android:color/white"
         tools:text="Finding Nemo" />
 
     <RatingBar
@@ -27,12 +30,14 @@
         android:layout_height="wrap_content"
         android:isIndicator="true"
         android:numStars="10"
+        android:progressTint="#FFEB3B"
         android:rating="9.3" />
 
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         tools:text="A fish named Nemo goes missing because he wanted to touch the boat. His brave
         father and a turtle go rescue him. A fish named Nemo goes missing because he wanted to touch
         the boat. His brave father and a turtle go rescue him."/>
