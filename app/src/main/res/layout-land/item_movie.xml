@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="2dp"
@@ -36,8 +37,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
-        android:textColor="@android:color/white"
         android:ellipsize="end"
         android:lines="9"
+        android:textColor="@android:color/white"
         tools:text="A fish named Nemo goes missing because he wanted to touch the boat. His brave father and a turtle go rescue him." />
 </RelativeLayout>
