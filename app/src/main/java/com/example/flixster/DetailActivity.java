@@ -44,8 +44,6 @@ public class DetailActivity extends YouTubeBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         binding.setMovie(movie);
 
-        postponeEnterTransition();
-
         String imageUrl;
         // if phone is in portrait
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -64,8 +62,6 @@ public class DetailActivity extends YouTubeBaseActivity {
                     .load(imageUrl)
                     .into(binding.ivPoster);
         }
-
-        startPostponedEnterTransition();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(String.format(VIDEOS_URL, movie.getMovieId()), new JsonHttpResponseHandler() {

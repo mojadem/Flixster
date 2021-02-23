@@ -33,6 +33,7 @@
             android:layout_toEndOf="@+id/ivPoster"
             android:textColor="@android:color/white"
             android:textSize="24sp"
+            android:textStyle="bold"
             android:text='@{movie.getTitle()}'
             tools:text="Finding Nemo" />
 
