@@ -1,8 +1,10 @@
 package com.example.flixster.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.databinding.InverseBindingMethod;
+import androidx.databinding.InverseBindingMethods;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.target.Target;
 import com.example.flixster.DetailActivity;
+import com.example.flixster.MainActivity;
 import com.example.flixster.R;
+import com.example.flixster.databinding.ItemMovieBinding;
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
@@ -51,6 +60,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         Log.d(TAG, "onBindViewHolder " + position);
         // Get the movie at the passed in position
         Movie movie = movies.get(position);
+        // Use data binding
+        holder.binding.setMovie(movie);
+        holder.binding.executePendingBindings();
         // Bind the movie data into the VH
         holder.bind(movie);
     }
@@ -63,52 +75,56 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        RelativeLayout container;
-        TextView tvTitle;
-        TextView tvOverview;
-        ImageView ivPoster;
+        final ItemMovieBinding binding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-            container = itemView.findViewById(R.id.container);
+            binding = ItemMovieBinding.bind(itemView);
         }
 
         public void bind(Movie movie) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
+
             String imageUrl;
-            // if phone is in landscape
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                // then imageUrl = backdrop image
-                imageUrl = movie.getBackdropPath();
-            } else {
-                // else imageUrl = poster image
+            // if phone is in portrait
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                // then imageUrl = poster image
                 imageUrl = movie.getPosterPath();
+                int radius = 30;
+                Glide.with(context)
+                        .load(imageUrl)
+                        .transform(new RoundedCorners(radius))
+                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                        .into(binding.ivPoster);
+            } else {
+                // else imageUrl = backdrop image
+                imageUrl = movie.getBackdropPath();
+                Glide.with(context)
+                        .load(imageUrl)
+                        .into(binding.ivPoster);
             }
 
-            tvTitle.post(new Runnable() {
+            // Adjusts tvOverview lines if tvTitle takes up multiple lines
+            binding.tvTitle.post(new Runnable() {
                 @Override
                 public void run() {
-                    int lineCount = tvTitle.getLineCount();
-                    if (lineCount > 1) {
-                        tvOverview.setMaxLines(tvOverview.getMaxLines() - 1);
+                    int lineCountTitle = binding.tvTitle.getLineCount();
+                    int lineCountOverview = binding.tvOverview.getLineCount();
+                    if (lineCountTitle > 1 && lineCountOverview > 7) {
+                        binding.tvOverview.setMaxLines(binding.tvOverview.getMaxLines() - 2);
                     }
                 }
             });
 
-            Glide.with(context).load(imageUrl).into(ivPoster);
-
             // Register click listener on whole container
-            container.setOnClickListener(new View.OnClickListener() {
+            binding.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Navigate to a new activity (detail view) on tap
                     Intent i = new Intent(context, DetailActivity.class);
                     i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, (View)binding.ivPoster, "detail");
+                    context.startActivity(i, options.toBundle());
                 }
             });
         }
